@@ -1,0 +1,244 @@
+﻿@model EmployeeCore.Core.Model.Employee;
+
+@{
+    Layout = null;
+}
+<head>
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/a10c7f6efa.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="~/js/site.js"></script>
+    <style>
+        body {
+            margin-top: 30px;
+            margin-bottom: 30px;
+            margin-right: 35%;
+            margin-left: 30%
+        }
+        body {
+            background-color: skyblue;
+        }
+        .error {
+            color: red;
+        }
+        .relative {
+            position: relative;
+        }
+        .appointment {
+            position: absolute;
+        }
+        input, textarea {
+            padding-left: 35px;
+        }
+        form {
+            border: 1px solid black;
+            border-radius: 25px;
+            padding-left: 50px;
+            padding-top: 10px;
+            padding-bottom: 20px;
+            background-color: white;
+        }
+    </style>
+    <script>
+        $().ready(function () {
+            $("#basic").validate({
+                rules: {
+                    First_Name: {
+                        required: true,
+                        minlength: 2,
+                        maxlength: 10
+                    },
+                    Address: {
+                        required: true,
+                        minlength: 5
+                    },
+                    Last_Name: {
+                        required: true,
+                        minlength: 2
+                    },
+                    Password: {
+                        required: true,
+
+                    },
+                    Confirm_Password: {
+                        required: true,
+                        minlength: 4,
+                        equalTo: "#password"
+                    }
+                },
+                messages: {
+                    First_Name: {
+                        required: " Please enter a FirstName",
+                        minlength: " Your username must consist of at least 2 characters",
+                        maxlength: "not more than 10 characters"
+                    },
+                    Address: {
+                        required: " Please enter a Address",
+                        minlength: " Your username must consist of at least 5 character"
+                    },
+                    Last_Name: {
+                        required: " Please enter a LastName",
+                        minlength: " Your username must consist of at least 2 characters"
+                    },
+
+
+                    Password: {
+                        required: " Please enter a password",
+                        minlength: " Your password must be consist of at least 4 characters"
+                    },
+                    Confirm_Password: {
+                        required: " Please enter a password",
+                        minlength: " Your password must be consist of at least 4 characters",
+                        equalTo: " Please enter the same password as above"
+                    }
+                }
+            });
+        });
+        function Submit() {
+            debugger
+            if ($("#basic").validate()) {
+                debugger
+                $("#basic").submit();
+            }
+        }
+    </script>
+</head>
+@using (Html.BeginForm("Index", "Employee", FormMethod.Post, new { @id = "basic" }))
+{
+    <body>
+        <form>
+            <h1 style="padding-bottom:30px;text-align:center; font-size: 20px;">EMPLOYEE DETEAILS FORM</h1>
+            @Html.HiddenFor(model=>model.Employee_Id)
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">First Name*</label>
+                <div class="col-sm-9">
+                    <div class="relative">
+                        <i class="fa fa-user appointment" style="padding-top:10px;padding-left:15px;"></i>
+                        @Html.TextBoxFor(model => model.First_Name,new{@placeholder="First Name"})<br>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Last Name*</label>
+                <div class="col-sm-9">
+                    <div class="relative">
+                        <i class="fa fa-user appointment" style="padding-top:10px;padding-left:15px;"></i>
+                        @Html.TextBoxFor(model => model.Last_Name,new{@placeholder="Last Name"})<br>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputDateOfJoining" class="col-sm-3 col-form-label">DateOfJoining</label>
+                <div class="col-sm-9">
+                    @Html.TextBoxFor(m => m.Date, new { type="date" })
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Age*</label>
+                <div class="col-sm-9">
+                    <div class="relative">
+                        <i class="fa-solid fa-cake-candles appointment" style="padding-top:10px;padding-left:15px;"></i>
+                        @Html.TextBoxFor(model => model.Age,new{@placeholder="Age"})<br>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputEmail" class="col-sm-3 col-form-label">Experience*</label>
+                <div class="col-sm-9">
+                    <div class="relative">
+                        <i class="fa-solid fa-graduation-cap appointment" style="padding-top:10px;padding-left:15px;"></i>
+                        @Html.TextBoxFor(model => model.Expereince,new{@placeholder="Experience"})<br>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">ContactNumber*</label>
+                <div class="col-sm-9">
+                    <div class="form-group input-group">
+                        <div class="relative">
+                            <i class="fa-solid fa-phone appointment" style="padding-top:10px;padding-left:15px;"></i>
+                            @Html.TextBoxFor(model => model.Contact_Number,new{@placeholder="Phone Number"})
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputPassword" class="col-sm-3 col-form-label">Location</label>
+                <div class="col-sm-9 location">
+                    @Html.DropDownList("Location_Id", new SelectList(ViewBag.Location, "Location_Id", "Location"), "Select Location")
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputPassword" class="col-sm-3 col-form-label">Address</label>
+                <div class="col-sm-9">
+                    <div class="relative">
+                        <i class="fa-solid fa-location-dot appointment" style="padding-top:10px;padding-left:15px;"></i>
+                        @Html.TextBoxFor(model => model.Address,  new {@placeholder="Address"})<br>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputPassword" class="col-sm-3 col-form-label">Password</label>
+                <div class="col-sm-9">
+                    <div class="relative">
+                        <i class="fa-solid fa-key appointment " style="padding-top:10px;padding-left:15px;"></i>
+                        @Html.TextBoxFor(model=>model.Password,new {type="password",name="password",id="password",placeholder="Password"})
+                        <span toggle="#password" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputPassword" class="col-sm-3 col-form-label">ConfirmPassword</label>
+                <div class="col-sm-9">
+                    <div class="relative">
+                        <i class="fa-solid fa-key appointment " style="padding-top:10px;padding-left:15px;"></i>
+                        @Html.TextBoxFor(model=>model.Confirm_Password,new {type="password",name="password",id="ConfirmPassword",placeholder="ConfirmPassword"})
+                        <span toggle="#ConfirmPassword" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-10 offset-sm-2">
+                    <button type="button" class="btn btn-success" onclick="Submit()">Submit</button>
+
+                    <input type="button" value="Read" onclick="location.href='@Url.Action("Read", "Employee")'" style="color:green; height:36px; width:70px; padding-left:10px" />
+                </div>
+            </div>
+        </form>
+
+    </body>
+
+}
+<script>
+    function myFunction() {
+        var x = document.getElementById("password");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+    function myRetype() {
+        var x = document.getElementById("ConfirmPassword");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+</script>
+<script>
+    $(".toggle-password").click(function () {
+        $(this).toggleClass("fa-eye fa-eye-slash");
+        var input = $($(this).attr("toggle"));
+        if (input.attr("type") == "password") {
+            input.attr("type", "text");
+        } else {
+            input.attr("type", "password");
+        }
+    });
+</script>
